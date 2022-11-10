@@ -39,11 +39,11 @@ jobs:
         
       - name: Extract Rack image version
         run: |
-          echo "rack-image-version=$(/bin/egrep -i '^DOCKER_IMAGE_VERSION.*:=' Makefile | tr -cd '[:digit:]')" >> $GITHUB_ENV
+          echo "RACK_DOCKER_IMAGE_VERSION=$(/bin/egrep -i '^DOCKER_IMAGE_VERSION.*:=' Makefile | tr -cd '[:digit:]')" >> $GITHUB_ENV
 
       - name: Print Rack image version
         run: |
-          echo "Rack image version from Makefile is ${{ env.rack-image-version }}"
+          echo "Rack image version from Makefile is ${{ env.RACK_DOCKER_IMAGE_VERSION }}"
           
       - name: Setup Docker buildx
         #uses: docker/setup-buildx-action@79abd3f86f79a9d68a23c75a09a9a85889262adf
