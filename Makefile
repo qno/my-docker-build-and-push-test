@@ -17,7 +17,7 @@ export JOBS_CT_NG :=
 endif
 
 RACK_SDK_VERSION := 2.1.2
-DOCKER_IMAGE_VERSION := 5
+DOCKER_IMAGE_VERSION := 6
 
 all: toolchain-all
 
