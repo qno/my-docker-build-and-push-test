@@ -38,9 +38,8 @@ jobs:
         uses: sigstore/cosign-installer@v2
         
       - name: Extract Rack image version
-        id: extract-image-version
         run: |
-          echo "rack-image-version=$(/bin/egrep -i '^DOCKER_IMAGE_VERSION.*:=' Makefile | tr -cd '[:digit:]')" >> $GITHUB_OUTPUT
+          echo "rack-image-version=$(/bin/egrep -i '^DOCKER_IMAGE_VERSION.*:=' Makefile | tr -cd '[:digit:]')" >> $GITHUB_ENV
 
       - name: Print Rack image version
         run: |
