@@ -19,4 +19,5 @@ RUN rm -rf /var/lib/apt/lists/*
 
 USER build
 
-CMD ["make rack-sdk-all && bash"]
+ENTRYPOINT ["/bin/sh -c make rack-sdk-all"]
+CMD ["bash"]
