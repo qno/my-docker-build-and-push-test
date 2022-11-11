@@ -1,3 +1,5 @@
-FROM alpine:3.16
-RUN apk add --no-cache mysql-client
-ENTRYPOINT ["mysql"]
+FROM ubuntu
+RUN  apt-get update && apt-get install -y --no-install-recommends git build-essential automake curl wget
+RUN rm -rf /var/lib/apt/lists/*
+
+ENTRYPOINT ["make", "rack-sdk-all"]
