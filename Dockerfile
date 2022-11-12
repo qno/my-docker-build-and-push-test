@@ -19,5 +19,7 @@ RUN rm -rf /var/lib/apt/lists/*
 
 USER build
 
-ENTRYPOINT ["/bin/sh -c make rack-sdk-all"]
+ADD entrypoint.sh /
+
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["bash"]
