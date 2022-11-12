@@ -2,11 +2,11 @@ name: Docker
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
     # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
+    tags: ['v*.*.*']
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 env:
   # Use docker.io for Docker Hub if empty
@@ -34,7 +34,6 @@ jobs:
       # https://github.com/sigstore/cosign-installer
       - name: Install cosign
         if: github.event_name != 'pull_request'
-        #uses: sigstore/cosign-installer@f3c664df7af409cb4873aa5068053ba9d61a57b6 #v2.6.0
         uses: sigstore/cosign-installer@v2
         
       - name: Extract Rack image version
@@ -46,13 +45,11 @@ jobs:
           echo "Rack image version from Makefile is ${{ env.RACK_DOCKER_IMAGE_VERSION }}"
           
       - name: Setup Docker buildx
-        #uses: docker/setup-buildx-action@79abd3f86f79a9d68a23c75a09a9a85889262adf
         uses: docker/setup-buildx-action@v2
 
       # Login against a Docker registry except on PR
       - name: Log into registry ${{ env.REGISTRY }}
         if: github.event_name != 'pull_request'
-        #uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
         uses: docker/login-action@v2
         with:
           registry: ${{ env.REGISTRY }}
@@ -62,7 +59,6 @@ jobs:
       # Extract metadata (tags, labels) for Docker
       - name: Extract Docker metadata
         id: meta
-        #uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         uses: docker/metadata-action@v4
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
@@ -74,8 +70,9 @@ jobs:
       # Build and push Docker image with Buildx (don't push on PR)
       - name: Build and push Docker image
         id: build-and-push
-        #uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
         uses: docker/build-push-action@v3
+        env:
+          JOBS: ${{ $(nproc) }}
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
