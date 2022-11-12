@@ -21,5 +21,5 @@ RUN chmod +x /entrypoint.sh
 
 USER build
 
-ENTRYPOINT /entrypoint.sh
-CMD bash
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["bash"]
