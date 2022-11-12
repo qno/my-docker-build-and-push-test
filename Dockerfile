@@ -14,13 +14,12 @@ COPY Makefile /home/build/rack-plugin-toolchain/
 
 USER root
 RUN make dep-ubuntu
-# Clean up files to free up space
 RUN rm -rf /var/lib/apt/lists/*
 
 USER build
 
 ADD entrypoint.sh /
-RUN ["chmod +x /entrypoint.sh"]
+RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["bash"]
+ENTRYPOINT /entrypoint.sh
+CMD bash
