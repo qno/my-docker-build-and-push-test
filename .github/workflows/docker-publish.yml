@@ -39,6 +39,10 @@ jobs:
       - name: Extract Rack image version
         run: |
           echo "RACK_DOCKER_IMAGE_VERSION=$(/bin/egrep -i '^DOCKER_IMAGE_VERSION.*:=' Makefile | tr -cd '[:digit:]')" >> $GITHUB_ENV
+          
+      - name: Get num CPU
+        run: |
+          echo "JOBS=$(nproc)" >> $GITHUB_ENV
 
       - name: Print Rack image version
         run: |
