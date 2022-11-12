@@ -16,10 +16,10 @@ USER root
 RUN make dep-ubuntu
 RUN rm -rf /var/lib/apt/lists/*
 
-USER build
-
 ADD entrypoint.sh /
 RUN chmod +x /entrypoint.sh
+
+USER build
 
 ENTRYPOINT /entrypoint.sh
 CMD bash
