@@ -20,6 +20,7 @@ RUN rm -rf /var/lib/apt/lists/*
 USER build
 
 ADD entrypoint.sh /
+RUN ["chmod +x /entrypoint.sh"]
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["bash"]
